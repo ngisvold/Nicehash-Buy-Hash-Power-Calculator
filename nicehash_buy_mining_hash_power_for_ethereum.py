@@ -2,10 +2,10 @@
 """
 Created on Mon Aug  7 14:22:13 2017
 
-@author: Nathan Gisvold Twitter @NathanGisvold
+@author: Nathan Gisvold Twitter: @NathanGisvold
 
-This script calulates potential profit/loss buying Ethereum mining hash power from Nicehash.com
-Please only use for demonstration as the calculation is basic and does not include pool fees, luck, or nicehash's fee etc.
+This script calculates potential profit/loss buying Ethereum mining hashing power from Nicehash.com
+Please use only for demonstration as the calculation is basic and does not include pool fees, luck, or nicehash's fee etc.
 
 """
 import json
@@ -60,7 +60,7 @@ def blocks_per_day(blocktime):
 #
 
 def btc_day(blocktime, eth_hashrate, network_hashrate, reward):
-    profit = blocks_per_day(blocktime) * ((eth_hashrate/1000000000)/(network_hashrate/ 1000000000)) * reward
+    profit = blocks_per_day(blocktime) * ((eth_hashrate)/(network_hashrate)) * reward
     return profit
 
 
