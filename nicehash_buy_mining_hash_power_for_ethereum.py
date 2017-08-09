@@ -4,7 +4,7 @@ Created on Mon Aug  7 14:22:13 2017
 
 @author: Nathan Gisvold Twitter @NathanGisvold
 
-This script calculates potential profit/loss buying Ethereum mining hash power from Nicehash.com
+This script calculates potential profit/loss buying Ethereum mining hashing power from Nicehash.com
 Please only use for demonstration as the calculation is basic and does not include pool fees, luck, or nicehash's fee etc.
 
 """
