@@ -17,6 +17,11 @@ from pandas.io.json import json_normalize
 eth_hashrate = 1000000000
 #Hardcode ether block reward 
 eth_block_reward = 5
+eth_pool_luck = .04 #Luck Percent / +Uncles
+eth_pool_stale = .015 #percent stale shares
+eth_beta_shrinkage = .02 #percent loss misc
+eth_pool_fee = .01
+nice_hash_buying_fee = .031
 
 #______________________________________________________________________________________________________
 # Calculate mining profit from hashrate, network hash, and blocktime for Ethereum
@@ -94,14 +99,14 @@ def call_Poloniex():
 #
 
 n = call_Poloniex()
-p = calc_mining_profit()
-usa_eth_cost = call_NiceHash()
+p = (((calc_mining_profit() *(1 + eth_pool_luck))*(1-eth_beta_shrinkage))*(1-eth_pool_stale))*(1-eth_pool_fee)
+usa_eth_cost = float(call_NiceHash()) * (1 + nice_hash_buying_fee)
 
 print(f'POLONIEX BTC_ETH: $ {n}')
-print(f'Nicehash BTC_ETH: $ {usa_eth_cost}')
-print(f'Revenue from Mining ETH in ETH: $ {p}')
+print(f'Nicehash BTC_ETH: $ {usa_eth_cost} with nicehash mining fee @ {nice_hash_buying_fee * 100}%')
+print(f'Revenue from Mining ETH in ETH: $ {p} @ pool luck {eth_pool_luck * 100}% - {eth_beta_shrinkage * 100}% Eth Loss Misc - {eth_pool_stale * 100}% Eth stale shares - {eth_pool_fee * 100}% Eth pool fee')
 print(f'Revenue from Mining ETH in BTC: $ {p*float(n)}')
-print(f'Gross Profit from Mining ETH in BTC: $ {(p*float(n))-float(usa_eth_cost)} or {((p*float(n))-float(usa_eth_cost))/p*float(n)}%')
+print(f'Gross Profit from Mining ETH in BTC: $ {(p*float(n))-float(usa_eth_cost)} or {(((p*float(n))-float(usa_eth_cost))/float(usa_eth_cost)*100)}%')
 
 
 
